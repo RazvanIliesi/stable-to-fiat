@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} User verification Done {% endblock %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>Documents uploaded successfully</h1>
+        <p> Thank you for submitting your documents! Our team is currently reviewing your information. This process may
+            take up to 24-48 hours. You will receive an email notification once your documents have been verified.</p>
+        <a href="{% url "offers-list" %}" class="btn btn-dark">Explore our offers</a>
+    </div>
+{% endblock content %}

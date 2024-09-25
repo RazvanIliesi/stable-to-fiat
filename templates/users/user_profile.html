@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Create a new user {% endblock %}
+
+{% block content %}
+
+<div class="profile-content">
+    <h5>Profile Information</h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>First Name: </strong>{{ user.first_name }}</li>
+        <li class="list-group-item"><strong>Last Name: </strong>{{ user.last_name }}</li>
+        <li class="list-group-item"><strong>Email: </strong>{{ user.email }}</li>
+        <li class="list-group-item"><strong>Address: </strong>{{ user_kyc.address }}</li>
+        <li class="list-group-item"><strong>City: </strong>{{ user_kyc.city }}</li>
+        <li class="list-group-item"><strong>State: </strong>{{ user_kyc.state }}</li>
+        <li class="list-group-item"><strong>Country: </strong>{{ user_kyc.country }}</li>
+        <li class="list-group-item"><strong>Phone Number: </strong>{{ user_kyc.phone_number }}</li>
+        <li class="list-group-item"><strong>Verification Status: </strong>{{ user_kyc.is_verified|yesno:"Verified, Not Verified" }}</li>
+    </ul>
+</div>
+
+<div class="text-center btn-edit">
+    <a href="{% url "edit-profile" user.id %}" class="btn btn-dark">Edit Profile</a>
+</div>
+
+{% endblock content %}

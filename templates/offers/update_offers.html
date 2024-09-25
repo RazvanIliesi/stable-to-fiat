@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Update {% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <br><br>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Update Offer</h3>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'offers-list' %}" class="btn btn-dark">Go Back</a>
+                    <button type="submit" class="btn btn-dark">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock content %}

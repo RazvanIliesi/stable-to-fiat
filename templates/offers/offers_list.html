@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Offer List{% endblock title %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Offers List</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if all_offers %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Buy Price</th>
+                    <th>Sell Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Add at</th>
+                    <th>Last change</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for offer in all_offers %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><img src="{{ offer.logo.url }}" alt="Logo" width="30" height="30"></td>
+                        <td>{{ offer.name }}-{{ offer.abbreviation }}</td>
+                        <td>{{ offer.buy_price }}</td>
+                        <td>{{ offer.sell_price }}</td>
+                        <td>{{ offer.stock }}</td>
+                        <td>
+                            {% if offer.active %}
+                                Online
+                            {% else %}
+                                Offline
+                            {% endif %}
+                        </td>
+                        <td>{{ offer.created_at }}</td>
+                        <td>{{ offer.updated_at }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-dark dropdown-toggle" type="button" id="actionDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Options
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="actionDropdown">
+                                    <li><a class="dropdown-item" href="{% url "update-offer" offer.id %}">Update</a>
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="{% url "delete-offer" offer.id %}">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        {% else %}
+            <br>
+            <h3 class="text-center">No offers available :(</h3>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}
