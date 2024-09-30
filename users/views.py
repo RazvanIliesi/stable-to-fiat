@@ -76,15 +76,18 @@ class UserProfile(DetailView):
     template_name = "users/user_profile.html"
 
     def get_object(self, queryset=None):
+
         user_id = self.kwargs.get('pk')
-        user = get_object_or_404(User, pk=user_id)
-        return user
+        return get_object_or_404(User, pk=user_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         user = self.get_object()
-        user_kyc = get_object_or_404(UserKYC, user=user)
+
+        try:
+            user_kyc = UserKYC.objects.get(user=user)
+        except UserKYC.DoesNotExist:
+            user_kyc = None
 
         context['user'] = user
         context['user_kyc'] = user_kyc
@@ -128,4 +131,3 @@ class EditProfileView(UpdateView):
     def get_success_url(self):
         user_id = self.object.id
         return reverse_lazy('user-profile', args=[user_id])
-

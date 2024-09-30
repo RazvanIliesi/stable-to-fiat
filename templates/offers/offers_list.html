@@ -43,19 +43,23 @@
                         </td>
                         <td>{{ offer.created_at }}</td>
                         <td>{{ offer.updated_at }}</td>
+                        {#                        <td>#}
+                        {#                            <div class="dropdown">#}
+                        {#                                <button class="btn btn-dark dropdown-toggle" type="button" id="actionDropdown"#}
+                        {#                                        data-bs-toggle="dropdown" aria-expanded="false">#}
+                        {#                                    Options#}
+                        {#                                </button>#}
+                        {#                                <ul class="dropdown-menu" aria-labelledby="actionDropdown">#}
+                        {#                                    <li><a class="dropdown-item" href="{% url "update-offer" offer.id %}">Update</a>#}
+                        {#                                    </li>#}
+                        {#                                    <li><a class="dropdown-item text-danger" href="{% url "delete-offer" offer.id %}">Delete</a>#}
+                        {#                                    </li>#}
+                        {#                                </ul>#}
+                        {#                            </div>#}
+                        {#                        </td>#}
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-dark dropdown-toggle" type="button" id="actionDropdown"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    Options
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="actionDropdown">
-                                    <li><a class="dropdown-item" href="{% url "update-offer" offer.id %}">Update</a>
-                                    </li>
-                                    <li><a class="dropdown-item text-danger" href="{% url "delete-offer" offer.id %}">Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <a href="{% url 'buy-order' offer.id %}" class="btn btn-success me-2" >Buy</a>
+                            <button class="btn btn-danger ">Sell</button>
                         </td>
 
                     </tr>

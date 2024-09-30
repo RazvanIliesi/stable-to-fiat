@@ -36,5 +36,6 @@ urlpatterns = [
          name="password_reset_confirm"),
     path("", include("django.contrib.auth.urls")),
 
-    path("", include("offers.urls"))
+    path("", include("offers.urls")),
+    path("", include("orders.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
