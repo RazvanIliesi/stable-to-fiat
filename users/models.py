@@ -12,6 +12,9 @@ class UserKYC(models.Model):
     personal_id = models.ImageField(upload_to='users_ids/')
     is_verified = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.user.get_full_name()} ({self.user.username})"
+
 
 
 

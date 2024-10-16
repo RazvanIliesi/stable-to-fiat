@@ -1,10 +1,23 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% block title %} Create order {% endblock %}
 
 {% block content %}
-    <h2>Create {{ order_type|capfirst }} Order for {{ offer.name }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Create {{ order_type|capfirst }} Order</button>
-    </form>
+    <div class="col-md-2 offset-md-5">
+        <br><br>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Buy</h3>
+            </div>
+            <h3 class="text-center">Create {{ order_type|capfirst }} Order for {{ offer.name }}</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-dark">Create {{ order_type|capfirst }} Order</button>
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>
 {% endblock %}

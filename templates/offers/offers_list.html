@@ -59,7 +59,7 @@
                         {#                        </td>#}
                         <td>
                             <a href="{% url 'buy-order' offer.id %}" class="btn btn-success me-2" >Buy</a>
-                            <button class="btn btn-danger ">Sell</button>
+                            <a href="{% url 'sell-order' offer.id %}" class="btn btn-danger me-2" >Sell</a>
                         </td>
 
                     </tr>

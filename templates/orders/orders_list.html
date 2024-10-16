@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Orders List{% endblock title %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Orders List</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if all_orders %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Order No</th>
+                    <th>User</th>
+                    <th>Currency</th>
+                    <th>Price</th>
+                    <th>Order Type</th>
+                    <th>Status</th>
+                    <th>Created at</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in all_orders %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.user_kyc }}</td>
+                        <td>{{ order.offer }}</td>
+                        <td>{{ order.price }}</td>
+                        <td>{{ order.order_type }}</td>
+                        <td>{% if order.status == 'pending' %}
+                            <span class="text-warning">{{ order.status|capfirst }}</span>
+                        {% elif order.status == 'canceled' %}
+                            <span class="text-danger">{{ order.status|capfirst }}</span>
+                        {% elif order.status == 'complete' %}
+                            <span class="text-success">{{ order.status|capfirst }}</span>
+                        {% endif %}
+                        </td>
+                        <td>{{ order.created_at }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-dark dropdown-toggle" type="button" id="actionDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Options
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="actionDropdown">
+                                    <li>
+                                        <!-- Form to mark the order as complete -->
+                                        <form action="{% url 'change-order-status' order.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" name="status" value="complete"
+                                                    class="dropdown-item text-success">
+                                                Complete
+                                            </button>
+                                            <button type="submit" name="status" value="canceled"
+                                                    class="dropdown-item text-danger">
+                                                Cancel
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        {% else %}
+            <br>
+            <h3 class="text-center">No orders available :(</h3>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}
